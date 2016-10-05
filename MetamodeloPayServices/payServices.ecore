@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="PayServices" nsURI="http://www.uniandes.edu.co/payServices"
+    nsPrefix="PayServices">
+  <eClassifiers xsi:type="ecore:EClass" name="EntidadNegocio">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="atributos" upperBound="-1"
+        eType="#//Atributo" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SuperEntidad">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="atributo" upperBound="-1"
+        eType="#//Atributo" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Atributo" abstract="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Relacion"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Variable" eSuperTypes="#//Atributo">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="valor" lowerBound="1" eType="#//Valor"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Constante" eSuperTypes="#//Atributo">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="valor" lowerBound="1" eType="#//Valor"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ExpresionArimetica">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="operandoIzq" lowerBound="1"
+        eType="#//Operandos" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="operandoDer" lowerBound="1"
+        eType="#//Operandos" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="operador" lowerBound="1"
+        eType="#//Operador" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Operandos" abstract="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Valor" eSuperTypes="#//Operandos"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Operador" abstract="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Suma" eSuperTypes="#//Operador"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Resta" eSuperTypes="#//Operador"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Division" eSuperTypes="#//Operador"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Multiplicacion" eSuperTypes="#//Operador"/>
+</ecore:EPackage>
