@@ -5,13 +5,17 @@
   <eClassifiers xsi:type="ecore:EClass" name="EntidadNegocio">
     <eStructuralFeatures xsi:type="ecore:EReference" name="atributos" upperBound="-1"
         eType="#//Atributo" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="aportes" upperBound="-1"
+        eType="#//Aporte" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="SuperEntidad">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="atributo" upperBound="-1"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="atributos" upperBound="-1"
         eType="#//Atributo" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Atributo" abstract="true"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Relacion"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Atributo" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="novedades" upperBound="-1"
+        eType="#//Novedad" containment="true"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Variable" eSuperTypes="#//Atributo">
     <eStructuralFeatures xsi:type="ecore:EReference" name="valor" lowerBound="1" eType="#//Valor"
         containment="true"/>
@@ -20,7 +24,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="valor" lowerBound="1" eType="#//Valor"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ExpresionArimetica">
+  <eClassifiers xsi:type="ecore:EClass" name="ExpresionArimetica" eSuperTypes="#//Operandos">
     <eStructuralFeatures xsi:type="ecore:EReference" name="operandoIzq" lowerBound="1"
         eType="#//Operandos" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="operandoDer" lowerBound="1"
@@ -29,10 +33,64 @@
         eType="#//Operador" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Operandos" abstract="true"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Valor" eSuperTypes="#//Operandos"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Valor" eSuperTypes="#//Operandos">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="clase" lowerBound="1" eType="#//Clase"
+        containment="true"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Operador" abstract="true"/>
   <eClassifiers xsi:type="ecore:EClass" name="Suma" eSuperTypes="#//Operador"/>
   <eClassifiers xsi:type="ecore:EClass" name="Resta" eSuperTypes="#//Operador"/>
   <eClassifiers xsi:type="ecore:EClass" name="Division" eSuperTypes="#//Operador"/>
   <eClassifiers xsi:type="ecore:EClass" name="Multiplicacion" eSuperTypes="#//Operador"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Validacion">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="aplicaSobre" lowerBound="1"
+        eType="#//Atributo"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="calculoAporte" lowerBound="1"
+        eType="#//CalculoAporte" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="condicion" eType="#//Condicion"
+        defaultValueLiteral="IGUAL"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="novedad" eType="#//Novedad"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="valorComparar" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="aplica" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="valorParaCalculo" lowerBound="1"
+        eType="#//Valor" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Clase"/>
+  <eClassifiers xsi:type="ecore:EClass" name="PagoServicio">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="superEntidades" upperBound="-1"
+        eType="#//SuperEntidad" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="entidadesNegocio" upperBound="-1"
+        eType="#//EntidadNegocio" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="bancos" upperBound="-1"
+        eType="#//Banco" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Novedad">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="tipoNovedad" lowerBound="1"
+        eType="#//TipoNovedad" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TipoNovedad"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Aporte">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="validaciones" upperBound="-1"
+        eType="#//Validacion" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CalculoAporte">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="expresionArimetica" lowerBound="1"
+        eType="#//ExpresionArimetica" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Banco">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="pago" upperBound="-1" eType="#//Pago"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Pago">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="calculoaporte" upperBound="-1"
+        eType="#//CalculoAporte" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="Condicion">
+    <eLiterals name="IGUAL"/>
+    <eLiterals name="DIFERENTE" value="1"/>
+    <eLiterals name="MENOR_IGUAL" value="2"/>
+    <eLiterals name="MAYOR_IGUAL" value="3"/>
+    <eLiterals name="MENOR" value="4"/>
+    <eLiterals name="MAYOR" value="5"/>
+  </eClassifiers>
 </ecore:EPackage>
